@@ -1,9 +1,17 @@
+#include <LoRa.h>
+#include "BluetoothSerial.h"
+
+BluetoothSerial SerialBT;
+
 void setup() {
-  // put your setup code here, to run once:
+  Serial.begin(115200);
+  SerialBT.begin("LoRaNode");
+
+  LoRa.begin(433E6);
 
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
+  SerialBT.println("Hello over Bluetooth!");
+  delay(1000);
 }
