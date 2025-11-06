@@ -1,6 +1,3 @@
-// This code is used to check LoRa bluetooth
-// After downloading code to LoRa, connect to LoRa via bluetooth, LoRa device should send hello message 
-
 #include <LoRa.h>
 #include "BluetoothSerial.h"
 
