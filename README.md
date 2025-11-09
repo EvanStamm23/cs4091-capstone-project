@@ -7,18 +7,18 @@ Navigate to File < Preferences and paste 'https://raw.githubusercontent.com/espr
 
 ## 2.0 - Project Structure
 cs4091-capstone-project/
-├── BatSignal_App/                  # iOS Swift app for LoRa BLE messages
-│   ├── LoRaApp/                    # Xcode project folder
-│   ├── LoRaApp.xcodeproj
-│   ├── LoRaAppTests/               # Unit Tests
-│   ├── LoRaAppUITests/             # UI tests
-├── lora-nodes/                     # Arduino/LoRa node code
-│   ├── lora-nodes.ino
-├── lora-recv/                      # LoRa receiver code (test code)
-│   └── lora-recv.ino
-├── lora/                           # LoRa sender code (test code)
-│   └── lora.ino  
-└── README.md                       # Top-level project README
+├── BatSignal_App/                  # iOS Swift app for LoRa BLE messages //
+│   ├── LoRaApp/                    # Xcode project folder //
+│   ├── LoRaApp.xcodeproj //
+│   ├── LoRaAppTests/               # Unit Tests //
+│   ├── LoRaAppUITests/             # UI tests //
+├── lora-nodes/                     # Arduino/LoRa node code //
+│   ├── lora-nodes.ino //
+├── lora-recv/                      # LoRa receiver code (test code) //
+│   └── lora-recv.ino //
+├── lora/                           # LoRa sender code (test code) //
+│   └── lora.ino   //
+└── README.md                       # Top-level project README //
 
 ## 3.0 - Mobile App
 ### Bluetooth Communication
