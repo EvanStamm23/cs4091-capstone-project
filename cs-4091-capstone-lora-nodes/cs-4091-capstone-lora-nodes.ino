@@ -1,17 +1,55 @@
-#include <LoRa.h>
-#include "BluetoothSerial.h"
+/*
+  Use BLE bluetooth to connect to iOS devices
+*/
+#include <NimBLEDevice.h>
 
-BluetoothSerial SerialBT;
+#define SERVICE_UUID        "12345678-1234-1234-1234-1234567890ab"
+#define CHARACTERISTIC_UUID "abcd1234-5678-90ab-cdef-1234567890ab"
+
+NimBLEServer* pServer;
+NimBLECharacteristic* pCharacteristic;
 
 void setup() {
   Serial.begin(115200);
-  SerialBT.begin("LoRaNode");
 
-  LoRa.begin(433E6);
+  // Initialize BLE device
+  NimBLEDevice::init("LoRaBLENode");
 
+  // Create BLE server
+  pServer = NimBLEDevice::createServer();
+
+  // Create a BLE service
+  NimBLEService* pService = pServer->createService(SERVICE_UUID);
+
+  // Create a BLE characteristic
+  pCharacteristic = pService->createCharacteristic(
+                      CHARACTERISTIC_UUID,
+                      NIMBLE_PROPERTY::READ |
+                      NIMBLE_PROPERTY::NOTIFY
+                    );
+
+  // Start the service
+  pService->start();
+
+  // Start advertising
+  NimBLEAdvertising* pAdvertising = NimBLEDevice::getAdvertising();
+  pAdvertising->addServiceUUID(SERVICE_UUID);
+  pAdvertising->start();
+
+  Serial.println("BLE Advertising started");
 }
 
 void loop() {
-  SerialBT.println("Hello over Bluetooth!");
-  delay(1000);
+  static unsigned long lastTime = 0;
+  if (pCharacteristic->getSubscribedCount() > 0) { // only if a client is subscribed
+    if (millis() - lastTime > 1000) {
+      lastTime = millis();
+      pCharacteristic->setValue("Hello over Bluetooth!");
+      pCharacteristic->notify();
+      Serial.println("Sent: Hello over Bluetooth!");
+    }
+  }
 }
+
+
+
