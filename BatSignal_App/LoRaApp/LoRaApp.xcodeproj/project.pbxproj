@@ -1,0 +1,624 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		849D2C0F2EBFE243006748B2 /* LoRaAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D2C0E2EBFE243006748B2 /* LoRaAppApp.swift */; };
+		849D2C112EBFE243006748B2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D2C102EBFE243006748B2 /* ContentView.swift */; };
+		849D2C132EBFE245006748B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 849D2C122EBFE245006748B2 /* Assets.xcassets */; };
+		849D2C172EBFE245006748B2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 849D2C162EBFE245006748B2 /* Preview Assets.xcassets */; };
+		849D2C212EBFE245006748B2 /* LoRaAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D2C202EBFE245006748B2 /* LoRaAppTests.swift */; };
+		849D2C2B2EBFE245006748B2 /* LoRaAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D2C2A2EBFE245006748B2 /* LoRaAppUITests.swift */; };
+		849D2C2D2EBFE245006748B2 /* LoRaAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D2C2C2EBFE245006748B2 /* LoRaAppUITestsLaunchTests.swift */; };
+		849D2C3A2EBFE381006748B2 /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D2C392EBFE381006748B2 /* BLEManager.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		849D2C1D2EBFE245006748B2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 849D2C032EBFE243006748B2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 849D2C0A2EBFE243006748B2;
+			remoteInfo = LoRaApp;
+		};
+		849D2C272EBFE245006748B2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 849D2C032EBFE243006748B2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 849D2C0A2EBFE243006748B2;
+			remoteInfo = LoRaApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		849D2C0B2EBFE243006748B2 /* LoRaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoRaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		849D2C0E2EBFE243006748B2 /* LoRaAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoRaAppApp.swift; sourceTree = "<group>"; };
+		849D2C102EBFE243006748B2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		849D2C122EBFE245006748B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		849D2C142EBFE245006748B2 /* LoRaApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LoRaApp.entitlements; sourceTree = "<group>"; };
+		849D2C162EBFE245006748B2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		849D2C1C2EBFE245006748B2 /* LoRaAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoRaAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		849D2C202EBFE245006748B2 /* LoRaAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoRaAppTests.swift; sourceTree = "<group>"; };
+		849D2C262EBFE245006748B2 /* LoRaAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoRaAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		849D2C2A2EBFE245006748B2 /* LoRaAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoRaAppUITests.swift; sourceTree = "<group>"; };
+		849D2C2C2EBFE245006748B2 /* LoRaAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoRaAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		849D2C392EBFE381006748B2 /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		849D2C082EBFE243006748B2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		849D2C192EBFE245006748B2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		849D2C232EBFE245006748B2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		849D2C022EBFE243006748B2 = {
+			isa = PBXGroup;
+			children = (
+				849D2C0D2EBFE243006748B2 /* LoRaApp */,
+				849D2C1F2EBFE245006748B2 /* LoRaAppTests */,
+				849D2C292EBFE245006748B2 /* LoRaAppUITests */,
+				849D2C0C2EBFE243006748B2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		849D2C0C2EBFE243006748B2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				849D2C0B2EBFE243006748B2 /* LoRaApp.app */,
+				849D2C1C2EBFE245006748B2 /* LoRaAppTests.xctest */,
+				849D2C262EBFE245006748B2 /* LoRaAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		849D2C0D2EBFE243006748B2 /* LoRaApp */ = {
+			isa = PBXGroup;
+			children = (
+				849D2C0E2EBFE243006748B2 /* LoRaAppApp.swift */,
+				849D2C102EBFE243006748B2 /* ContentView.swift */,
+				849D2C122EBFE245006748B2 /* Assets.xcassets */,
+				849D2C142EBFE245006748B2 /* LoRaApp.entitlements */,
+				849D2C152EBFE245006748B2 /* Preview Content */,
+				849D2C392EBFE381006748B2 /* BLEManager.swift */,
+			);
+			path = LoRaApp;
+			sourceTree = "<group>";
+		};
+		849D2C152EBFE245006748B2 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				849D2C162EBFE245006748B2 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		849D2C1F2EBFE245006748B2 /* LoRaAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				849D2C202EBFE245006748B2 /* LoRaAppTests.swift */,
+			);
+			path = LoRaAppTests;
+			sourceTree = "<group>";
+		};
+		849D2C292EBFE245006748B2 /* LoRaAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				849D2C2A2EBFE245006748B2 /* LoRaAppUITests.swift */,
+				849D2C2C2EBFE245006748B2 /* LoRaAppUITestsLaunchTests.swift */,
+			);
+			path = LoRaAppUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		849D2C0A2EBFE243006748B2 /* LoRaApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 849D2C302EBFE245006748B2 /* Build configuration list for PBXNativeTarget "LoRaApp" */;
+			buildPhases = (
+				849D2C072EBFE243006748B2 /* Sources */,
+				849D2C082EBFE243006748B2 /* Frameworks */,
+				849D2C092EBFE243006748B2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LoRaApp;
+			productName = LoRaApp;
+			productReference = 849D2C0B2EBFE243006748B2 /* LoRaApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		849D2C1B2EBFE245006748B2 /* LoRaAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 849D2C332EBFE245006748B2 /* Build configuration list for PBXNativeTarget "LoRaAppTests" */;
+			buildPhases = (
+				849D2C182EBFE245006748B2 /* Sources */,
+				849D2C192EBFE245006748B2 /* Frameworks */,
+				849D2C1A2EBFE245006748B2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				849D2C1E2EBFE245006748B2 /* PBXTargetDependency */,
+			);
+			name = LoRaAppTests;
+			productName = LoRaAppTests;
+			productReference = 849D2C1C2EBFE245006748B2 /* LoRaAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		849D2C252EBFE245006748B2 /* LoRaAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 849D2C362EBFE245006748B2 /* Build configuration list for PBXNativeTarget "LoRaAppUITests" */;
+			buildPhases = (
+				849D2C222EBFE245006748B2 /* Sources */,
+				849D2C232EBFE245006748B2 /* Frameworks */,
+				849D2C242EBFE245006748B2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				849D2C282EBFE245006748B2 /* PBXTargetDependency */,
+			);
+			name = LoRaAppUITests;
+			productName = LoRaAppUITests;
+			productReference = 849D2C262EBFE245006748B2 /* LoRaAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		849D2C032EBFE243006748B2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					849D2C0A2EBFE243006748B2 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					849D2C1B2EBFE245006748B2 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 849D2C0A2EBFE243006748B2;
+					};
+					849D2C252EBFE245006748B2 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 849D2C0A2EBFE243006748B2;
+					};
+				};
+			};
+			buildConfigurationList = 849D2C062EBFE243006748B2 /* Build configuration list for PBXProject "LoRaApp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 849D2C022EBFE243006748B2;
+			productRefGroup = 849D2C0C2EBFE243006748B2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				849D2C0A2EBFE243006748B2 /* LoRaApp */,
+				849D2C1B2EBFE245006748B2 /* LoRaAppTests */,
+				849D2C252EBFE245006748B2 /* LoRaAppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		849D2C092EBFE243006748B2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				849D2C172EBFE245006748B2 /* Preview Assets.xcassets in Resources */,
+				849D2C132EBFE245006748B2 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		849D2C1A2EBFE245006748B2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		849D2C242EBFE245006748B2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		849D2C072EBFE243006748B2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				849D2C112EBFE243006748B2 /* ContentView.swift in Sources */,
+				849D2C3A2EBFE381006748B2 /* BLEManager.swift in Sources */,
+				849D2C0F2EBFE243006748B2 /* LoRaAppApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		849D2C182EBFE245006748B2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				849D2C212EBFE245006748B2 /* LoRaAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		849D2C222EBFE245006748B2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				849D2C2D2EBFE245006748B2 /* LoRaAppUITestsLaunchTests.swift in Sources */,
+				849D2C2B2EBFE245006748B2 /* LoRaAppUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		849D2C1E2EBFE245006748B2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 849D2C0A2EBFE243006748B2 /* LoRaApp */;
+			targetProxy = 849D2C1D2EBFE245006748B2 /* PBXContainerItemProxy */;
+		};
+		849D2C282EBFE245006748B2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 849D2C0A2EBFE243006748B2 /* LoRaApp */;
+			targetProxy = 849D2C272EBFE245006748B2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		849D2C2E2EBFE245006748B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		849D2C2F2EBFE245006748B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		849D2C312EBFE245006748B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = LoRaApp/LoRaApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"LoRaApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 2N64W4F45V;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "This app needs Bluetooth to connect to your LoRa device";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "This app uses Bluetooth to receive messages from your LoRa device";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = BatSignal.LoRaApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		849D2C322EBFE245006748B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = LoRaApp/LoRaApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"LoRaApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 2N64W4F45V;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "This app needs Bluetooth to connect to your LoRa device";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "This app uses Bluetooth to receive messages from your LoRa device";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = BatSignal.LoRaApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		849D2C342EBFE245006748B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = BatSignal.LoRaAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LoRaApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LoRaApp";
+			};
+			name = Debug;
+		};
+		849D2C352EBFE245006748B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = BatSignal.LoRaAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LoRaApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LoRaApp";
+			};
+			name = Release;
+		};
+		849D2C372EBFE245006748B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = BatSignal.LoRaAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LoRaApp;
+			};
+			name = Debug;
+		};
+		849D2C382EBFE245006748B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = BatSignal.LoRaAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LoRaApp;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		849D2C062EBFE243006748B2 /* Build configuration list for PBXProject "LoRaApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				849D2C2E2EBFE245006748B2 /* Debug */,
+				849D2C2F2EBFE245006748B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		849D2C302EBFE245006748B2 /* Build configuration list for PBXNativeTarget "LoRaApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				849D2C312EBFE245006748B2 /* Debug */,
+				849D2C322EBFE245006748B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		849D2C332EBFE245006748B2 /* Build configuration list for PBXNativeTarget "LoRaAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				849D2C342EBFE245006748B2 /* Debug */,
+				849D2C352EBFE245006748B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		849D2C362EBFE245006748B2 /* Build configuration list for PBXNativeTarget "LoRaAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				849D2C372EBFE245006748B2 /* Debug */,
+				849D2C382EBFE245006748B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 849D2C032EBFE243006748B2 /* Project object */;
+}

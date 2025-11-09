@@ -1,0 +1,37 @@
+# Xcode
+DerivedData/
+build/
+*.xcworkspace/xcuserdata/
+*.xccheckout
+*.moved-aside
+*.xcuserdatad
+
+# Swift Package Manager
+.build/
+Packages/
+Package.resolved
+
+# CocoaPods
+Pods/
+
+# App outputs
+*.ipa
+*.app
+
+# MacOS
+.DS_Store
+*.swp
+
+# User-specific settings
+*.perspectivev3
+*.mode1v3
+*.mode2v3
+*.pbxuser
+*.xcuserstate
+*.xcscmblueprint
+
+# Temporary files
+*.orig
+*.swp
+*.tmp
+
