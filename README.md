@@ -6,19 +6,21 @@ Click on the 'Select Board' Dropdown and select 'Esp32 Dev Module'
 Navigate to File < Preferences and paste 'https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_dev_index.json' into the 'Additional Boards Manager URLs' field
 
 ## 2.0 - Project Structure
-cs4091-capstone-project/
-├── BatSignal_App/                  # iOS Swift app for LoRa BLE messages <br>
-│   ├── LoRaApp/                    # Xcode project folder <br>
-│   ├── LoRaApp.xcodeproj <br>
-│   ├── LoRaAppTests/               # Unit Tests <br>
-│   ├── LoRaAppUITests/             # UI tests <br>
+```
+cs4091-capstone-project/ 
+├── BatSignal_App/                  # iOS Swift app for LoRa BLE messages 
+│   ├── LoRaApp/                    # Xcode project folder 
+│   ├── LoRaApp.xcodeproj 
+│   ├── LoRaAppTests/               # Unit Tests 
+│   ├── LoRaAppUITests/             # UI tests 
 ├── lora-nodes/                     # Arduino/LoRa node code <br>
-│   ├── lora-nodes.ino <br>
-├── lora-recv/                      # LoRa receiver code (test code) <br>
-│   └── lora-recv.ino <br>
-├── lora/                           # LoRa sender code (test code) <br>
-│   └── lora.ino   <br>
-└── README.md                       # Top-level project README <br>
+│   ├── lora-nodes.ino 
+├── lora-recv/                      # LoRa receiver code (test code) 
+│   └── lora-recv.ino 
+├── lora/                           # LoRa sender code (test code) 
+│   └── lora.ino   
+└── README.md                       # Top-level project README 
+```
 
 ## 3.0 - Mobile App
 ### Bluetooth Communication
