@@ -7,7 +7,7 @@ Navigate to File < Preferences and paste 'https://raw.githubusercontent.com/espr
 
 ## 2.0 - Project Structure
 cs4091-capstone-project/
-├── BatSignal_App/                  # iOS Swift app for LoRa BLE messages //
+├── BatSignal_App/                  # iOS Swift app for LoRa BLE messages \\
 │   ├── LoRaApp/                    # Xcode project folder //
 │   ├── LoRaApp.xcodeproj //
 │   ├── LoRaAppTests/               # Unit Tests //
