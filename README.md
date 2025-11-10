@@ -1,11 +1,21 @@
-# CS 4091 Capstone II Project
-## 1.0 - IDE Setup
-Install Arduino IDE from https://www.arduino.cc/en/software/ 
-On the left panel, find and click on 'Boards Manager' and search for esp32. Click install on esp32 by Espressif Systems.
-Click on the 'Select Board' Dropdown and select 'Esp32 Dev Module' 
-Navigate to File < Preferences and paste 'https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_dev_index.json' into the 'Additional Boards Manager URLs' field
+# BatSignal - CS4091 Capstone II Project
+A LoRa and BLE-based system for safety and proximity awareness in cave exploration.
 
-## 2.0 - Project Structure
+**BatSignal** is a LoRa-based proximity and communication system designed to help keep a team of spelunkers safe underground. It uses short-range wireless communication and proximity detection via LoRa (Long Range) radios and Bluetooth Low Energy (BLE).
+
+Three LoRa nodes communicate with each other to measure RSSI (signal strength), which is used to estimate relative proximity between team members. <br>
+With built-in alert systems and emergency button functionality, this project enhances team safety by warning users when a memebr is out of range or when an emergency signal is triggered.
+
+A companion iOS app connects via BLE to one LoRa node and displays real-time proximity data visually.
+
+## 2.0 Features
+1. LoRa Communication between mutliple devices
+2. Low-Energy Bluetooth connection to iOS app
+3. Real-time RSSI visualization
+4. Alert features using LoRa button input
+5. Alert and LED signaling based on proximity threshold
+
+## 3.0 - Project Structure
 ```
 cs4091-capstone-project/ 
 ├── BatSignal_App/                  # iOS Swift app for LoRa BLE messages 
@@ -22,14 +32,26 @@ cs4091-capstone-project/
 └── README.md                       # Top-level project README 
 ```
 
-## 3.0 - Mobile App
+## 4.0 - IDE Setup
+Install Arduino IDE from https://www.arduino.cc/en/software/ 
+On the left panel, find and click on 'Boards Manager' and search for esp32. Click install on esp32 by Espressif Systems.
+Click on the 'Select Board' Dropdown and select 'Esp32 Dev Module' 
+Navigate to File < Preferences and paste 'https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_dev_index.json' into the 'Additional Boards Manager URLs' field
+
+## 5.0 - Mobile App
 ### Bluetooth Communication
-For this project, we chose to implement BLE (Bluetooth Low Energy), a Bluetooth protocol optimized for low-power communication. BLE is a lightweight, energy-efficient, and compatible with iOS devices.
+The app implements BLE (Bluetooth Low Energy),a Bluetooth protocol optimized for low-power communication. BLE is a lightweight, energy-efficient, and compatible with iOS devices. BLE allows us to receive real-time messages or signal strength (RSSI) from nearby LoRa nodes.
 
 ### App Setup
 We implemented the mobile app using Swift in Xcode. The iOS app connects to the LoRa node via BLE and displays the messages sent by the LoRa device
 
 ### App Testing
 1. **Flash the LoRa Node**: First, upload the BLE logic to the LoRa device. The code is stored in 'lora-nodes/lora-nodes.ino'
-2. **Build the iOS App**: For this you will need a second device that is plugged into the machine running your app code. Open the Xcode project in 'BatSignal_App/LoRaApp/', set your device as the build target, and press the build/run button.
-3. **Test the Connection**: Once the app is running on your iOS device, it should connect to the LoRa node and display messages sent via BLE
+2. **Connect Device**: Plug Apple device into machine that is running the app code: 'BatSignal_App/LoRaApp'
+3. **Build**: Set your apple device as the build target, and press the build/run button or (Cmd + R).
+4. **Test the Connection**: Once the app is running on your iOS device, it should connect to the LoRa node and display messages sent via BLE, might need to give permission in bluetooth settings.
+
+## 6.0 - Hardware Requirements
+1. 3 x LoRa modules (ESP32 + LoRa)
+2. 1 x iPhone (for BLE connection)
+3. Antennas and USB cables
