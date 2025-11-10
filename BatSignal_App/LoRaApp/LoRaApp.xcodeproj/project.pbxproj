@@ -15,6 +15,7 @@
 		849D2C2B2EBFE245006748B2 /* LoRaAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D2C2A2EBFE245006748B2 /* LoRaAppUITests.swift */; };
 		849D2C2D2EBFE245006748B2 /* LoRaAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D2C2C2EBFE245006748B2 /* LoRaAppUITestsLaunchTests.swift */; };
 		849D2C3A2EBFE381006748B2 /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D2C392EBFE381006748B2 /* BLEManager.swift */; };
+		84BBAF392EC19133005934C8 /* ProximityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BBAF382EC19133005934C8 /* ProximityView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		849D2C2A2EBFE245006748B2 /* LoRaAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoRaAppUITests.swift; sourceTree = "<group>"; };
 		849D2C2C2EBFE245006748B2 /* LoRaAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoRaAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		849D2C392EBFE381006748B2 /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
+		84BBAF382EC19133005934C8 /* ProximityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximityView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				849D2C142EBFE245006748B2 /* LoRaApp.entitlements */,
 				849D2C152EBFE245006748B2 /* Preview Content */,
 				849D2C392EBFE381006748B2 /* BLEManager.swift */,
+				84BBAF382EC19133005934C8 /* ProximityView.swift */,
 			);
 			path = LoRaApp;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 			files = (
 				849D2C112EBFE243006748B2 /* ContentView.swift in Sources */,
 				849D2C3A2EBFE381006748B2 /* BLEManager.swift in Sources */,
+				84BBAF392EC19133005934C8 /* ProximityView.swift in Sources */,
 				849D2C0F2EBFE243006748B2 /* LoRaAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

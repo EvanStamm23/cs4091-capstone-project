@@ -19,6 +19,11 @@ struct ContentView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 100, height: 100) // adjust size
+            
+            ProximityView(rssi: bleManager.latestRSSI)
+                .padding()
+            
+            Divider()
 
             Text("LoRa BLE Messages")
                 .font(.headline)

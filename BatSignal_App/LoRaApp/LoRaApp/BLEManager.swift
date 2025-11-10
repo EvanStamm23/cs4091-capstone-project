@@ -13,7 +13,8 @@ import Combine
 class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var centralManager: CBCentralManager!
     @Published var messages: [String] = []
-    
+    @Published var latestRSSI: Int = -100
+
     var loRaPeripheral: CBPeripheral?
     let characteristicUUID = CBUUID(string: "ABCD1234-5678-90AB-CDEF-1234567890AB")
     let serviceUUID = CBUUID(string: "12345678-1234-1234-1234-1234567890AB")
@@ -79,5 +80,14 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
             }
         }
     }
+    
+    // for RSSI
+    func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
+        DispatchQueue.main.async {
+            self.latestRSSI = RSSI.intValue
+            print("RSSI updated: \(self.latestRSSI)")
+        }
+    }
+
 }
 
