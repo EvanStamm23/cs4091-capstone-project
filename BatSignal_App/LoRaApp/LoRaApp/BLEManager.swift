@@ -12,8 +12,10 @@ import Combine
 
 class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var centralManager: CBCentralManager!
+    
     @Published var messages: [String] = []
     @Published var latestRSSI: Int = -100
+    @Published var connectedDeviceName: String = "Not Connected"
 
     var loRaPeripheral: CBPeripheral?
     let characteristicUUID = CBUUID(string: "ABCD1234-5678-90AB-CDEF-1234567890AB")
@@ -49,6 +51,9 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Connected to LoRa device!")
+        DispatchQueue.main.async {
+            self.connectedDeviceName = peripheral.name ?? "Unknown Device"
+        }
         peripheral.discoverServices(nil)
     }
     

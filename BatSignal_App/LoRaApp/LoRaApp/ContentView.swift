@@ -20,6 +20,12 @@ struct ContentView: View {
                 .scaledToFit()
                 .frame(width: 100, height: 100) // adjust size
             
+            Text("Connected to: \(bleManager.connectedDeviceName)")
+                .font(.headline)
+                .padding(.bottom, 10)
+            
+            Divider()
+            
             ProximityView(rssi: bleManager.latestRSSI)
                 .padding()
             
