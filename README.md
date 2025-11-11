@@ -24,7 +24,10 @@ cs4091-capstone-project/
 │   ├── LoRaAppTests/               # Unit Tests 
 │   ├── LoRaAppUITests/             # UI tests 
 ├── lora-nodes/                     # Arduino/LoRa node code <br>
-│   ├── lora-nodes.ino 
+│   ├── lora-nodes.ino              # Shared logic between LoRa nodes (BLE setup, function to send data over BLE)
+│   ├── lora-node-1.ino             # Logic for LoRa-node-1, unquie node_id, calc. RSSI 
+│   ├── lora-node-2.ino             
+│   ├── lora-node-3.ino             
 ├── lora-recv/                      # LoRa receiver code (test code) 
 │   └── lora-recv.ino 
 ├── lora/                           # LoRa sender code (test code) 
