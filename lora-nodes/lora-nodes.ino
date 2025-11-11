@@ -30,7 +30,6 @@ void setup() {
 
   // Start the service
   pService->start();
-
   // Start advertising
   NimBLEAdvertising* pAdvertising = NimBLEDevice::getAdvertising();
   pAdvertising->addServiceUUID(SERVICE_UUID);
@@ -41,7 +40,9 @@ void setup() {
 
 void loop() {
   static unsigned long lastTime = 0;
-  if (pCharacteristic->getSubscribedCount() > 0) { // only if a client is subscribed
+  
+  // Check if any device is connected to the server
+  if (pServer->getConnectedCount() > 0) {
     if (millis() - lastTime > 1000) {
       lastTime = millis();
       pCharacteristic->setValue("Hello over Bluetooth!");
