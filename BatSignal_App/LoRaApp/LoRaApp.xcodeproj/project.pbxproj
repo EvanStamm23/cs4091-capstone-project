@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8440C4752EC63F9700A8AAAD /* rssi_db.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8440C4732EC63F9700A8AAAD /* rssi_db.xcdatamodeld */; };
+		8440C4772EC642B900A8AAAD /* dbController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440C4762EC642B900A8AAAD /* dbController.swift */; };
+		8440C4792EC642EE00A8AAAD /* NodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440C4782EC642EE00A8AAAD /* NodeManager.swift */; };
 		849D2C0F2EBFE243006748B2 /* LoRaAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D2C0E2EBFE243006748B2 /* LoRaAppApp.swift */; };
 		849D2C112EBFE243006748B2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D2C102EBFE243006748B2 /* ContentView.swift */; };
 		849D2C132EBFE245006748B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 849D2C122EBFE245006748B2 /* Assets.xcassets */; };
@@ -36,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8440C4742EC63F9700A8AAAD /* rssi_db.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = rssi_db.xcdatamodel; sourceTree = "<group>"; };
+		8440C4762EC642B900A8AAAD /* dbController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dbController.swift; sourceTree = "<group>"; };
+		8440C4782EC642EE00A8AAAD /* NodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeManager.swift; sourceTree = "<group>"; };
 		849D2C0B2EBFE243006748B2 /* LoRaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoRaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		849D2C0E2EBFE243006748B2 /* LoRaAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoRaAppApp.swift; sourceTree = "<group>"; };
 		849D2C102EBFE243006748B2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -79,6 +85,9 @@
 		849D2C022EBFE243006748B2 = {
 			isa = PBXGroup;
 			children = (
+				8440C4782EC642EE00A8AAAD /* NodeManager.swift */,
+				8440C4762EC642B900A8AAAD /* dbController.swift */,
+				8440C4732EC63F9700A8AAAD /* rssi_db.xcdatamodeld */,
 				849D2C0D2EBFE243006748B2 /* LoRaApp */,
 				849D2C1F2EBFE245006748B2 /* LoRaAppTests */,
 				849D2C292EBFE245006748B2 /* LoRaAppUITests */,
@@ -266,9 +275,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				849D2C112EBFE243006748B2 /* ContentView.swift in Sources */,
+				8440C4772EC642B900A8AAAD /* dbController.swift in Sources */,
 				849D2C3A2EBFE381006748B2 /* BLEManager.swift in Sources */,
 				84BBAF392EC19133005934C8 /* ProximityView.swift in Sources */,
+				8440C4752EC63F9700A8AAAD /* rssi_db.xcdatamodeld in Sources */,
 				849D2C0F2EBFE243006748B2 /* LoRaAppApp.swift in Sources */,
+				8440C4792EC642EE00A8AAAD /* NodeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +635,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8440C4732EC63F9700A8AAAD /* rssi_db.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8440C4742EC63F9700A8AAAD /* rssi_db.xcdatamodel */,
+			);
+			currentVersion = 8440C4742EC63F9700A8AAAD /* rssi_db.xcdatamodel */;
+			name = rssi_db.xcdatamodeld;
+			path = "/Users/admin/Desktop/cs4091-capstone-project/BatSignal_App/LoRaApp/rssi_db.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 849D2C032EBFE243006748B2 /* Project object */;
 }

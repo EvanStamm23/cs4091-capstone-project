@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23E224" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="NodeEntity" representedClassName="NodeEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isLeader" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="rssiLogs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RSSILogEntity" inverseName="node" inverseEntity="RSSILogEntity"/>
+    </entity>
+    <entity name="RSSILogEntity" representedClassName="RSSILogEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rssiValue" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="node" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NodeEntity" inverseName="rssiLogs" inverseEntity="NodeEntity"/>
+    </entity>
+</model>
