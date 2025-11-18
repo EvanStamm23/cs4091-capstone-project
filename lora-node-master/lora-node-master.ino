@@ -10,12 +10,17 @@
 
 String messageText;
 
+const byte MASTER_ID = 0xAA;
+const byte CLIENT1_ID = 0xB1;
+const byte CLIENT2_ID = 0xB2;
+
 byte messageID = 0;
 byte localAddress = 0xAA;     // address of this device
 byte destination01 = 0xBB;
 byte destination02 = 0xCC;
 long lastSendTime = 0;        // last send time
 int interval = 5000;          // interval between sends, default starting at 5s
+byte nextClient = CLIENT1_ID;
 
 void setup() {
   Serial.begin(115200);                   // initialize serial
@@ -40,7 +45,8 @@ void setup() {
 void loop() {
   if (millis() - lastSendTime > interval) { // check time against last send time
     String message = "Status Message";
-    sendMessage(message);
+    sendMessage(message, nextClient);
+    nextClient = (nextClient == CLIENT1_ID) ? CLIENT2_ID : CLIENT1_ID;
     Serial.println("Sending " + message);
     lastSendTime = millis();            // timestamp the message
     interval = random(2000) + 3000;    // 3-5 seconds
@@ -49,10 +55,10 @@ void loop() {
   recieveMessage(LoRa.parsePacket()); // parse for a packet, and handle recieve logic:
 }
 
-void sendMessage(String outgoingMessage){
+void sendMessage(String outgoingMessage, byte destination){
   LoRa.beginPacket();
   
-  LoRa.write(destination01);
+  LoRa.write(destination);
   LoRa.write(localAddress);
   LoRa.write(messageID);
   LoRa.write(outgoingMessage.length());
