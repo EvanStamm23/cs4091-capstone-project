@@ -15,18 +15,22 @@
 //Pins for OLED screen
 #define OLED_SDA 21
 #define OLED_SCL 22
-#define OLED_RST 23
+#define OLED_RST -1
 #define SCREEN_WIDTH 128 //OLED display width, in pixels
 #define SCREEN_HEIGHT 64 //OLED display height, in pixels
 
 //Creates object for OLED screen called display
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RST);
+  
+static unsigned long lastUpdate = 0;
 
 void setup() {
   Serial.begin(115200);
   while (!Serial);
-
   Serial.println("LoRa Receiver");
+  
+  //initialize OLED
+  Wire.begin(OLED_SDA, OLED_SCL);
 
   // Initialize SPI with correct pins
   SPI.begin(SCK, MISO, MOSI, NSS);
@@ -49,8 +53,6 @@ void setup() {
   delay(20);
   digitalWrite(OLED_RST, HIGH);
 
-  //initialize OLED
-  Wire.begin(OLED_SDA, OLED_SCL);
   if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3c, false, false)) { //Address 0x3c for 128x32
     Serial.println(F("SSD1306 allocation failed"));
   }
@@ -66,8 +68,8 @@ void setup() {
 
 void loop() {
   int packetSize = LoRa.parsePacket();
-  Serial.print("Packet size:");
-  Serial.println(packetSize);
+  //Serial.print("Packet size:");
+  //Serial.println(packetSize);
   if (packetSize) {
     Serial.print("Received packet: ");
     while (LoRa.available()) {
@@ -77,15 +79,18 @@ void loop() {
     Serial.println(LoRa.packetRssi());
 
     //On device screen
-    display.clearDisplay();
-    display.setTextColor(WHITE);
-    display.setTextSize(1);
-    display.setCursor(0,0);
-    display.print("Device: ");
-    display.println("Reciever");
-    display.setCursor(0,20);
-    display.print("RSSI of Sender: ");
-    display.println(LoRa.packetRssi());
-    display.display();
+    if (millis() - lastUpdate > 1000) {  // update every second to avoid constant display calls
+      display.clearDisplay();
+      display.setTextColor(WHITE);
+      display.setTextSize(1);
+      display.setCursor(0,0);
+      display.print("Device: ");
+      display.println("Reciever");
+      display.setCursor(0,20);
+      display.print("RSSI of Sender: ");
+      display.println(LoRa.packetRssi());
+      display.display();
+      lastUpdate = millis();
+    }
   }
 }
