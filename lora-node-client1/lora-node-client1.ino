@@ -1,1 +1,93 @@
+#include <SPI.h>
+#include <LoRa.h>
 
+#define SCK   5
+#define MISO  19
+#define MOSI  27
+#define NSS   18
+#define RST   14
+#define DIO0  26
+
+const byte MASTER_ID = 0xAA;
+const byte CLIENT1_ID = 0xB1;
+const byte CLIENT2_ID = 0xB2;
+
+byte localAddress = CLIENT1_ID;
+byte messageID = 0;
+
+void setup() {
+  Serial.begin(115200);                   // initialize serial
+  while (!Serial);
+
+  Serial.println("Starting LoRa Transciever");
+
+  // Initialize SPI with correct pins
+  SPI.begin(SCK, MISO, MOSI, NSS);
+  
+  // Configure LoRa pins
+  LoRa.setPins(NSS, RST, DIO0);
+
+  if (!LoRa.begin(433E6)) {             // initialize ratio at 433 MHz
+    Serial.println("LoRa init failed. Check your connections.");
+    while (true);                       // if failed, do nothing
+  }
+
+  Serial.println("LoRa Client initialize succeeded at address 0x" + String(localAddress, HEX));
+}
+
+void loop() {
+  receiveMessage(LoRa.parsePacket());
+}
+
+void receiveMessage(int packetSize){
+  if (packetSize == 0) return;  
+  
+  int recipient = LoRa.read();
+  byte sender = LoRa.read();
+  byte incomingMessageID = LoRa.read();    
+  byte incomingLength = LoRa.read();
+
+  String incomingMessage = "";
+
+  while (LoRa.available()) {
+    incomingMessage += (char)LoRa.read();
+  }
+
+  if (incomingLength != incomingMessage.length()) {   // check for length mismatch
+    Serial.println("Error: message length does not match length");
+    return;
+  }
+
+  // if the recipient isn't this device or broadcast,
+  if (recipient != localAddress && recipient != 0xFF) {
+    Serial.println("Received message not meant for this receiver.");
+    return;
+  }
+
+  Serial.println("Received from LoRa Node: 0x" + String(sender, HEX));
+  Serial.println("Sent to LoRa Node: 0x" + String(recipient, HEX));
+  Serial.println("Message ID: " + String(incomingMessageID));
+  Serial.println("Message length: " + String(incomingLength));
+  Serial.println("Message: " + incomingMessage);
+  Serial.println("RSSI: " + String(LoRa.packetRssi()));
+  Serial.println("Snr: " + String(LoRa.packetSnr())); // snr gives ratio of recieved signal power compared to background noise power, the higer the snr, the stronger and clearer the signal is
+  Serial.println();
+  
+  if (incomingMessage == "Status Check") { //If message case is normal status check, send status response
+    sendReply(sender);
+  }
+}
+
+void sendReply(byte destination) {
+  String reply = "Status Reply from 0x" + String(localAddress, HEX);
+
+  LoRa.beginPacket();
+  LoRa.write(destination);
+  LoRa.write(localAddress);
+  LoRa.write(messageID++);
+  LoRa.write(reply.length());
+  LoRa.print(reply);
+  LoRa.endPacket();
+
+  Serial.println("Sent reply to MASTER at 0x" + String(destination, HEX));
+}
