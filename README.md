@@ -44,6 +44,13 @@ On the left panel, find and click on 'Boards Manager' and search for esp32. Clic
 Click on the 'Select Board' Dropdown and select 'Esp32 Dev Module' 
 Navigate to File < Preferences and paste 'https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_dev_index.json' into the 'Additional Boards Manager URLs' field
 
+### 4.1 - Required Dependencies
+- Adafruit SSD1306 by Adafruit (Version 2.5.15)
+- Adafruit GFX Library by Adafruit (Version 1.12.4)
+- Adafruit BusIO by Adafruit (Version 1.17.4)
+- LoRa by Sandeep Mistry (Version 0.8.0)
+- NimBLE-Arduino by h2zero (Version 2.3.6)
+
 ## 5.0 - Mobile App
 ### Bluetooth Communication
 The app implements BLE (Bluetooth Low Energy),a Bluetooth protocol optimized for low-power communication. BLE is a lightweight, energy-efficient, and compatible with iOS devices. BLE allows us to receive real-time messages or signal strength (RSSI) from nearby LoRa nodes.
