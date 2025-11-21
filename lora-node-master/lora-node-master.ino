@@ -1,5 +1,8 @@
 #include <SPI.h>
 #include <LoRa.h>
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
 
 #define SCK   5
 #define MISO  19
@@ -7,6 +10,13 @@
 #define NSS   18
 #define RST   14
 #define DIO0  26
+
+//Pins for OLED screen
+#define OLED_SDA 21
+#define OLED_SCL 22
+#define OLED_RST -1
+#define SCREEN_WIDTH 128 //OLED display width, in pixels
+#define SCREEN_HEIGHT 64 //OLED display height, in pixels
 
 String messageText;
 
@@ -20,13 +30,20 @@ long lastSendTime = 0;        // last send time
 int interval = 12000;          // interval between sends, default starting at 12s
 byte nextClient = CLIENT1_ID;
 
+//Creates object for OLED screen called display
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RST);
+  
+static unsigned long lastUpdate = 0;
+
 void setup() {
   Serial.begin(115200);                   // initialize serial
   while (!Serial);
-
   Serial.println("Starting LoRa Transciever");
+  
+  //initialize OLED
+  Wire.begin(OLED_SDA, OLED_SCL);
 
-    // Initialize SPI with correct pins
+  // Initialize SPI with correct pins
   SPI.begin(SCK, MISO, MOSI, NSS);
   
   // Configure LoRa pins
@@ -38,6 +55,24 @@ void setup() {
   }
 
   Serial.println("LoRa Master initialize succeeded at address 0x" + String(localAddress, HEX));
+
+  //Begin OLED stuff
+  //reset OLED display via software
+  pinMode(OLED_RST, OUTPUT);
+  digitalWrite(OLED_RST, LOW);
+  delay(20);
+  digitalWrite(OLED_RST, HIGH);
+
+  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3c, false, false)) { //Address 0x3c for 128x32
+    Serial.println(F("SSD1306 allocation failed"));
+  }
+
+  display.clearDisplay();
+  display.setTextColor(WHITE);
+  display.setTextSize(1);
+  display.setCursor(0,0);
+  display.print("Master Device");
+  display.display();
 }
 
 void loop() {
@@ -50,6 +85,19 @@ void loop() {
   }
 
   receiveMessage(LoRa.parsePacket()); // check for packet response, parse, and handle receive logic
+}
+
+void updateDisplay(int rssiValue){
+  display.clearDisplay();
+  display.setTextColor(WHITE);
+  display.setTextSize(1);
+  display.setCursor(0,0);
+  display.print("Device: ");
+  display.println("Client 1");
+  display.setCursor(0,20);
+  display.print("RSSI of Sender: ");
+  display.println(rssiValue);
+  display.display();
 }
 
 void sendMessage(String outgoingMessage, byte destination){
@@ -97,4 +145,10 @@ void receiveMessage(int packetSize){
   Serial.println("RSSI: " + String(LoRa.packetRssi()));
   Serial.println("Snr: " + String(LoRa.packetSnr())); // snr gives ratio of received signal power compared to background noise power, the higer the snr, the stronger and clearer the signal is
   Serial.println();
+
+  //On device screen
+  if (millis() - lastUpdate > 200) {  // update every second to avoid constant display calls
+    updateDisplay(LoRa.packetRssi());
+    lastUpdate = millis();
+  }
 }
