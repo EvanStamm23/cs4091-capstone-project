@@ -79,10 +79,13 @@ void setup() {
 }
 
 void loop() {
-  receiveMessage(LoRa.parsePacket());
-
+  //receiveMessage(LoRa.parsePacket());
+  int fakeRSSI1 = -65;
+  bleNode.notifyRSSI(0xB2, localAddress, fakeRSSI1);
   // send RSSI value to app
-  bleNode.notifyRSSI(localAddress, 0xAA, LoRa.packetRssi());
+  int fakeRSSI2 = -78;
+  bleNode.notifyRSSI(0xB3, localAddress, fakeRSSI2);
+  //bleNode.notifyRSSI(localAddress, 0xAA, LoRa.packetRssi());
   delay(1000);
 }
 
