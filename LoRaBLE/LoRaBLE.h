@@ -10,13 +10,14 @@ class LoRaBLE {
 private:
   NimBLEServer* pServer;
   NimBLECharacteristic* pCharacteristic;
-  string nodeName;
-  string characteristicUUID;
+  String nodeName;
+  String serviceUUID;
+  String characteristicUUID;
   unsigned long lastSendTime;
 
 public:
   LoRaBLE(String _nodeName, String _serviceUUID, String _characteristicUUID)
-    : nodeName(_nodeName), serviceUUID(_serciceUUID), characteristicUUID(_characteristicUUID), lastSendTime(0) {}
+    : nodeName(_nodeName), serviceUUID(_serviceUUID), characteristicUUID(_characteristicUUID), lastSendTime(0) {}
 
   void begin() {
     Serial.println("Initializing BLE...");
