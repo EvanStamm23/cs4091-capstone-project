@@ -1,53 +1,54 @@
 /*
   Use BLE bluetooth to connect to iOS devices
 */
+#ifndef LORABLE_H
+#define LORABLE_H
+
 #include <NimBLEDevice.h>
 
-#define SERVICE_UUID        "12345678-1234-1234-1234-1234567890ab"
-#define CHARACTERISTIC_UUID "abcd1234-5678-90ab-cdef-1234567890ab"
+class LoRaBLE {
+private:
+  NimBLEServer* pServer;
+  NimBLECharacteristic* pCharacteristic;
+  string nodeName;
+  string characteristicUUID;
+  unsigned long lastSendTime;
 
-NimBLEServer* pServer;
-NimBLECharacteristic* pCharacteristic;
+public:
+  LoRaBLE(String _nodeName, String _serviceUUID, String _characteristicUUID)
+    : nodeName(_nodeName), serviceUUID(_serciceUUID), characteristicUUID(_characteristicUUID), lastSendTime(0) {}
 
-void setup() {
-  Serial.begin(115200);
+  void begin() {
+    Serial.println("Initializing BLE...");
+    NimBLEDevice::init(nodeName.c_str());
+    pServer = NimBLEDevice::createServer();
+    NimBLEService* pService = pServer->createService(serviceUUID.c_str());
+    pCharacteristic = pService->createCharacteristic(
+        characteristicUUID.c_str(),
+        NIMBLE_PROPERTY::READ | NIMBLE_PROPERTY::NOTIFY
+    );
+    pService->start();
 
-  // Initialize BLE device
-  NimBLEDevice::init("LoRaBLENode");
+    NimBLEAdvertising* pAdvertising = NimBLEDevice::getAdvertising();
+    pAdvertising->addServiceUUID(serviceUUID.c_str());
+    pAdvertising->start();
 
-  // Create BLE server
-  pServer = NimBLEDevice::createServer();
-
-  // Create a BLE service
-  NimBLEService* pService = pServer->createService(SERVICE_UUID);
-
-  // Create a BLE characteristic
-  pCharacteristic = pService->createCharacteristic(
-                      CHARACTERISTIC_UUID,
-                      NIMBLE_PROPERTY::READ |
-                      NIMBLE_PROPERTY::NOTIFY
-                    );
-
-  // Start the service
-  pService->start();
-  // Start advertising
-  NimBLEAdvertising* pAdvertising = NimBLEDevice::getAdvertising();
-  pAdvertising->addServiceUUID(SERVICE_UUID);
-  pAdvertising->start();
-
-  Serial.println("BLE Advertising started");
-}
-
-void loop() {
-  static unsigned long lastTime = 0;
-  
-  // Check if any device is connected to the server
-  if (pServer->getConnectedCount() > 0) {
-    if (millis() - lastTime > 1000) {
-      lastTime = millis();
-      pCharacteristic->setValue("Hello over Bluetooth!");
-      pCharacteristic->notify();
-      Serial.println("Sent: Hello over Bluetooth!");
-    }
+    Serial.println("BLE Advertising started");
   }
-}
+
+  void notifyMessage(String message) {
+    if (pServer->getConnectedCount() > 0) {
+      pCharacteristic->setValue(message.c_str());
+      pCharacteristic->notify();
+      Serial.println("Sent: " + message);
+      }
+  }
+
+  void notifyRSSI(int sourceId, int targetId, int rssiValue) {
+    String msg = "RSSI,source=" + String(sourceId) + ",target=" + String(targetId) + ",value=" + String(rssiValue);
+    notifyMessage(msg);
+  }
+};
+
+#endif
+
