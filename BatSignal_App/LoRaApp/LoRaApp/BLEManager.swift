@@ -16,11 +16,15 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
     @Published var messages: [String] = []
     @Published var latestRSSI: Int = -100
     @Published var connectedDeviceName: String = "Not Connected"
-
+    
     var loRaPeripheral: CBPeripheral?
     let characteristicUUID = CBUUID(string: "ABCD1234-5678-90AB-CDEF-1234567890AB")
     let serviceUUID = CBUUID(string: "12345678-1234-1234-1234-1234567890AB")
-
+    
+    let nodeManager = NodeManager()
+    
+    var rssiTimer: Timer?
+    
     override init() {
         super.init()
         print("BLEManager initialized")
@@ -55,6 +59,18 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
             self.connectedDeviceName = peripheral.name ?? "Unknown Device"
         }
         peripheral.discoverServices(nil)
+        
+        // start reading rssi every 1 second
+        startRSSIUpdates()
+    }
+    
+    // Called when device disconnects
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        print("Disconnected from device")
+        stopRSSIUpdates()
+        DispatchQueue.main.async {
+            self.connectedDeviceName = "Not Connected"
+        }
     }
     
     // MARK: - CBPeripheralDelegate
@@ -78,21 +94,64 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
     }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        if let data = characteristic.value, let message = String(data: data, encoding: .utf8) {
-            DispatchQueue.main.async {
-                self.messages.append(message)
-                print("Received message: \(message)")
-            }
+        guard let data = characteristic.value,
+              let message = String(data: data, encoding: .utf8) else { return }
+
+        print("Received message: \(message)")
+        
+        if let log = parseLoRaMessage(message) {
+            nodeManager.createRSSILog(sourceId: log.source, targetId: log.target, rssiValue: log.rssi)
         }
     }
+
+    func parseLoRaMessage(_ message: String) -> (source: Int64, target: Int64, rssi: Int64)? {
+        // Example: "RSSI,source=1,target=2,value=-70"
+        let parts = message.components(separatedBy: ",")
+        guard parts.count == 4 else { return nil }
+        let source = Int64(parts[1].split(separator: "=")[1]) ?? 0
+        let target = Int64(parts[2].split(separator: "=")[1]) ?? 0
+        let rssi = Int64(parts[3].split(separator: "=")[1]) ?? 0
+        return (source, target, rssi)
+    }
+
     
-    // for RSSI
+    // rssi callback - save to db
     func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
+        guard error == nil else {
+            print("Error reading RSSI: \(error!.localizedDescription)")
+            return
+        }
+        
+        let rssiValue = RSSI.int64Value
+        
         DispatchQueue.main.async {
             self.latestRSSI = RSSI.intValue
             print("RSSI updated: \(self.latestRSSI)")
+            
+            // ✅ Save to database
+            // Use nodeId: 1 for now, or extract from peripheral identifier
+            self.nodeManager.saveRSSIFromBLE(sourceId: 1, targetId: -1, rssiValue: rssiValue)
+            print("✅ Saved RSSI \(rssiValue) to database")
         }
     }
-
+    
+    // Start periodic RSSI readings
+    func startRSSIUpdates() {
+        print("Starting RSSI updates...")
+        rssiTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+            self?.loRaPeripheral?.readRSSI()
+        }
+    }
+    
+    // Stop RSSI readings
+    func stopRSSIUpdates() {
+        print("Stopping RSSI updates...")
+        rssiTimer?.invalidate()
+        rssiTimer = nil
+    }
+    
+    // Cleanup when object is destroyed
+    deinit {
+        stopRSSIUpdates()
+    }
 }
-

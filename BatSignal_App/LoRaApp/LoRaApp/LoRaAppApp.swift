@@ -20,12 +20,12 @@ struct LoRaAppApp: App {
 
 // code for db functionality
 struct YourAppNameApp: App {
-    let persistenceController = PersistenceController.shared
+    let persistenceController = PersistenceController.shared // initialize db
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, persistenceController.viewContext)
+                .environment(\.managedObjectContext, persistenceController.viewContext) // give all views access to db
         }
     }
 }

@@ -6,8 +6,9 @@
         <relationship name="rssiLogs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RSSILogEntity" inverseName="node" inverseEntity="RSSILogEntity"/>
     </entity>
     <entity name="RSSILogEntity" representedClassName="RSSILogEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="rssiValue" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sourceNodeId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="targetNodeId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="node" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NodeEntity" inverseName="rssiLogs" inverseEntity="NodeEntity"/>
     </entity>
