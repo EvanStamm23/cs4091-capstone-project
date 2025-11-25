@@ -3,6 +3,7 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include <LoRaBLE.h>
 
 #define SCK   5
 #define MISO  19
@@ -25,6 +26,9 @@ const byte CLIENT2_ID = 0xB2;
 byte localAddress = CLIENT1_ID;
 byte messageID = 0;
 
+// create BLE object
+LoRaBLE bleNode("LoRaBLENode", "12345678-1234-1234-1234-1234567890ab", "abcd1234-5678-90ab-cdef-1234567890ab");
+
 //Creates object for OLED screen called display
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RST);
   
@@ -32,6 +36,8 @@ static unsigned long lastUpdate = 0;
 
 void setup() {
   Serial.begin(115200);                   // initialize serial
+  bleNode.begin();
+  
   while (!Serial);
 
   Serial.println("Starting LoRa Transciever");
@@ -74,6 +80,10 @@ void setup() {
 
 void loop() {
   receiveMessage(LoRa.parsePacket());
+
+  // send RSSI value to app
+  bleNode.notifyRSSI()
+  delay(1000);
 }
 
 void updateDisplay(int rssiValue){
