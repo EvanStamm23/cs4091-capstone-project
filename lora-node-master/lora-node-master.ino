@@ -3,6 +3,7 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include <LoRaBLE.h>
 
 #define SCK   5
 #define MISO  19
@@ -24,6 +25,9 @@ const byte MASTER_ID = 0xAA;
 const byte CLIENT1_ID = 0xB1;
 const byte CLIENT2_ID = 0xB2;
 
+// create BLE object
+LoRaBLE bleNode("Master", "12345678-1234-1234-1234-1234567890ab", "abcd1234-5678-90ab-cdef-1234567890ab");
+
 byte messageID = 0;
 byte localAddress = MASTER_ID;     // address of this device
 long lastSendTime = 0;        // last send time
@@ -35,8 +39,17 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RST);
   
 static unsigned long lastUpdate = 0;
 
+struct ClientRSSI {
+  byte id;
+  int rssi;
+};
+ClientRSSI clients[2] = {{CLIENT1_ID, 0}, {CLIENT2_ID, 0}};
+
+
 void setup() {
   Serial.begin(115200);                   // initialize serial
+  bleNode.begin();  // initialize begin
+
   while (!Serial);
   Serial.println("Starting LoRa Transciever");
   
@@ -85,6 +98,14 @@ void loop() {
   }
 
   receiveMessage(LoRa.parsePacket()); // check for packet response, parse, and handle receive logic
+
+  static unsigned long lastBLEUpdate = 0;
+  if (millis() - lastBLEUpdate > 1000) {
+    for (int i=0; i<2; i++) {
+        bleNode.notifyRSSI(clients[i].id, localAddress, clients[i].rssi);
+    }      
+    lastBLEUpdate = millis();
+  }
 }
 
 void updateDisplay(int rssiValue){
@@ -135,6 +156,14 @@ void receiveMessage(int packetSize){
   if (recipient != localAddress && recipient != 0xFF) {
     Serial.println("Received message not meant for this receiver.");
     return;
+  }
+
+  // Update RSSI for correct client
+  for (int i = 0; i < 2; i++) {
+    if (clients[i].id == sender) {
+        clients[i].rssi = LoRa.packetRssi();
+        break;
+    }
   }
 
   Serial.println("Received from LoRa Node: 0x" + String(sender, HEX));
