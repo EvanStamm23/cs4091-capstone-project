@@ -93,7 +93,7 @@ void updateDisplay(int rssiValue){
   display.setTextSize(1);
   display.setCursor(0,0);
   display.print("Device: ");
-  display.println("Client 1");
+  display.println("Master");
   display.setCursor(0,20);
   display.print("RSSI of Sender: ");
   display.println(rssiValue);
