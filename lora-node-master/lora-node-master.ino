@@ -31,7 +31,7 @@ LoRaBLE bleNode("Master", "12345678-1234-1234-1234-1234567890ab", "abcd1234-5678
 byte messageID = 0;
 byte localAddress = MASTER_ID;     // address of this device
 long lastSendTime = 0;        // last send time
-int interval = 12000;          // interval between sends, default starting at 12s
+int interval = 5000;          // interval between sends, default starting at 12s
 byte nextClient = CLIENT1_ID;
 
 //Creates object for OLED screen called display
@@ -48,7 +48,7 @@ ClientRSSI clients[2] = {{CLIENT1_ID, 0}, {CLIENT2_ID, 0}};
 // RSSI distance formula constants
 // PATH_LOSS_EXPONENT: environment factor (2.0 = free space, 2.7-4 indoor)
 const float RSSI_AT_ONE_METER = -40.0; 
-const float PATH_LOSS_EXPONENT = 2.0;
+const float PATH_LOSS_EXPONENT = 4.0;
 
 // Convert RSSI to distanceusing d = 10^{(A - R) / (10 * n)}
 float rssiToDistance(int rssi) {
@@ -103,9 +103,10 @@ void setup() {
 void loop() {
   if (millis() - lastSendTime > interval) { // check time against last send time
     String message = "Status Check";
-    sendMessage(message, nextClient);
-    nextClient = (nextClient == CLIENT1_ID) ? CLIENT2_ID : CLIENT1_ID;
-    Serial.println("Sending " + message);
+    // Send the same message to both clients back-to-back
+    sendMessage(message, CLIENT1_ID);
+    sendMessage(message, CLIENT2_ID);
+    Serial.println("Sent to both clients: " + message);
     lastSendTime = millis();            // timestamp the message
   }
 
