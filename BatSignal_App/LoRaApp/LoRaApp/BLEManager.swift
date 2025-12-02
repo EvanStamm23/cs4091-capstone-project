@@ -16,6 +16,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
     @Published var messages: [String] = []
     @Published var latestRSSI: Int = -100
     @Published var connectedDeviceName: String = "Not Connected"
+    @Published var nodeRSSI: [Int64: Int] = [:] // key: sourceNodeId, value: RSSI
     
     var loRaPeripheral: CBPeripheral?
     let characteristicUUID = CBUUID(string: "ABCD1234-5678-90AB-CDEF-1234567890AB")
@@ -44,7 +45,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        if peripheral.name == "LoRaBLENode" {
+        if peripheral.name == "Master" {
             loRaPeripheral = peripheral
             loRaPeripheral!.delegate = self
             centralManager.stopScan()
@@ -101,6 +102,16 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
         
         if let log = parseLoRaMessage(message) {
             nodeManager.createRSSILog(sourceId: log.source, targetId: log.target, rssiValue: log.rssi)
+
+            // ✅ Update RSSI in-memory for UI
+            DispatchQueue.main.async {
+                self.nodeRSSI[log.source] = Int(log.rssi)
+                
+                // If the source is the master, set device name
+                if log.source == 0xAA { // MASTER_ID
+                    self.connectedDeviceName = "Master"
+                }
+            }
         }
     }
 

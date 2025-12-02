@@ -16,6 +16,15 @@ struct ContentView: View {
     // used to visualize db
     @State private var showRSSILogs = false
     @State private var displayedLogs: [RSSILogEntity] = []
+    
+    func nodeName(for id: Int64) -> String {
+        switch id {
+        case 0xAA: return "Master"
+        case 0xB1: return "Client 1"
+        case 0xB2: return "Client 2"
+        default: return String(format: "0x%02X", id)
+        }
+    }
 
     var body: some View {
         VStack {
@@ -31,8 +40,17 @@ struct ContentView: View {
             
             Divider()
             
-            ProximityView(rssi: bleManager.latestRSSI)
+            // Display RSSI for Master and Clients
+            ForEach([Int64(0xAA), Int64(0xB1), Int64(0xB2)], id: \.self) { nodeId in
+                let rssi = bleManager.nodeRSSI[nodeId] ?? -100
+                VStack {
+                    Text(nodeName(for: nodeId))
+                        .font(.subheadline)
+                        .padding(.bottom, 2)
+                    ProximityView(rssi: rssi)
+                }
                 .padding()
+            }
             
             Divider()
 
