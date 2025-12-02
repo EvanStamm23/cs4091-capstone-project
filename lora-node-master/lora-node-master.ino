@@ -45,16 +45,14 @@ struct ClientRSSI {
 };
 ClientRSSI clients[2] = {{CLIENT1_ID, 0}, {CLIENT2_ID, 0}};
 
-// RSSI -> distance calibration
-// RSSI_AT_ONE_METER: expected RSSI (dBm) measured at 1 meter from transmitter
-// PATH_LOSS_EXPONENT (n): environment factor (2.0 = free space, 2.7-3.5 indoor, etc.)
-const float RSSI_AT_ONE_METER = -40.0; // adjust after calibration
+// RSSI distance formula constants
+// PATH_LOSS_EXPONENT: environment factor (2.0 = free space, 2.7-4 indoor)
+const float RSSI_AT_ONE_METER = -40.0; 
 const float PATH_LOSS_EXPONENT = 2.0;
 
-// Convert RSSI (dBm) to distance (meters) using d = 10^{(A - R) / (10 * n)}
+// Convert RSSI to distanceusing d = 10^{(A - R) / (10 * n)}
 float rssiToDistance(int rssi) {
-  // guard against unusual values
-  if (rssi == 0) return -1.0; // unknown
+  if (rssi == 0) return -1.0;
   float exponent = (RSSI_AT_ONE_METER - (float)rssi) / (10.0 * PATH_LOSS_EXPONENT);
   return pow(10.0, exponent);
 }
@@ -211,7 +209,7 @@ void receiveMessage(int packetSize){
 
   //On device screen
   if (millis() - lastUpdate > 200) {  // update every second to avoid constant display calls
-    updateDisplay(LoRa.packetRssi(), String(sender, HEX));
+    updateDisplay(LoRa.packetRssi());
     lastUpdate = millis();
   }
 }
