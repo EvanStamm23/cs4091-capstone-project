@@ -45,6 +45,20 @@ struct ClientRSSI {
 };
 ClientRSSI clients[2] = {{CLIENT1_ID, 0}, {CLIENT2_ID, 0}};
 
+// RSSI -> distance calibration
+// RSSI_AT_ONE_METER: expected RSSI (dBm) measured at 1 meter from transmitter
+// PATH_LOSS_EXPONENT (n): environment factor (2.0 = free space, 2.7-3.5 indoor, etc.)
+const float RSSI_AT_ONE_METER = -40.0; // adjust after calibration
+const float PATH_LOSS_EXPONENT = 2.0;
+
+// Convert RSSI (dBm) to distance (meters) using d = 10^{(A - R) / (10 * n)}
+float rssiToDistance(int rssi) {
+  // guard against unusual values
+  if (rssi == 0) return -1.0; // unknown
+  float exponent = (RSSI_AT_ONE_METER - (float)rssi) / (10.0 * PATH_LOSS_EXPONENT);
+  return pow(10.0, exponent);
+}
+
 
 void setup() {
   Serial.begin(115200);                   // initialize serial
@@ -118,6 +132,19 @@ void updateDisplay(int rssiValue){
   display.setCursor(0,20);
   display.print("RSSI of Sender: ");
   display.println(rssiValue);
+
+  // Convert RSSI to estimated distance
+  float distance = rssiToDistance(rssiValue);
+  display.setCursor(0,36);
+  if (distance < 0) {
+    display.print("Distance: N/A");
+  } else {
+    // show two decimal places
+    String distStr = String(distance, 2);
+    display.print("Distance: ");
+    display.print(distStr);
+    display.print(" m");
+  }
   display.display();
 }
 
