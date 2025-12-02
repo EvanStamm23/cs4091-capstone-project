@@ -122,15 +122,22 @@ void loop() {
   }
 }
 
-void updateDisplay(int rssiValue){
+void updateDisplay(int rssiValue, String sender){
   display.clearDisplay();
   display.setTextColor(WHITE);
   display.setTextSize(1);
   display.setCursor(0,0);
   display.print("Device: ");
   display.println("Master");
-  display.setCursor(0,20);
-  display.print("RSSI of Sender: ");
+  if(sender == String(CLIENT1_ID, HEX)){
+    display.setCursor(0,20);
+    display.print("RSSI of " + sender + " ");
+  }
+  else if (sender == String(CLIENT2_ID, HEX)){
+    display.setCursor(0,40);
+    display.print("RSSI of " + sender + " ");
+  }
+
   display.println(rssiValue);
 
   // Convert RSSI to estimated distance
@@ -204,7 +211,7 @@ void receiveMessage(int packetSize){
 
   //On device screen
   if (millis() - lastUpdate > 200) {  // update every second to avoid constant display calls
-    updateDisplay(LoRa.packetRssi());
+    updateDisplay(LoRa.packetRssi(), String(sender, HEX));
     lastUpdate = millis();
   }
 }
