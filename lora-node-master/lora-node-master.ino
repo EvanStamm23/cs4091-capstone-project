@@ -43,8 +43,10 @@ struct ClientRSSI {
   byte id;
   int rssi;
   bool active;
+  long lastResponse;
+  float lastDistance;
 };
-ClientRSSI clients[2] = {{CLIENT1_ID, 0, false}, {CLIENT2_ID, 0, false}};
+ClientRSSI clients[2] = {{CLIENT1_ID, 0, false, 0}, {CLIENT2_ID, 0, false, 0}};
 
 // RSSI distance formula constants
 // PATH_LOSS_EXPONENT: environment factor (2.0 = free space, 2.7-4 indoor)
@@ -105,9 +107,12 @@ void loop() {
   if (millis() - lastSendTime > interval) { // check time against last send time
     String message = "Status Check";
     // Send the same message to both clients back-to-back
-    sendMessage(message, CLIENT1_ID);
-    sendMessage(message, CLIENT2_ID);
-    Serial.println("Sent to both clients: " + message);
+    sendMessage(message, nextClient);
+    nextClient = (nextClient == CLIENT1_ID) ? CLIENT2_ID : CLIENT1_ID;
+    Serial.println("Sending " + message);
+    // sendMessage(message, CLIENT1_ID);
+    // sendMessage(message, CLIENT2_ID);
+    // Serial.println("Sent to both clients: " + message);
     lastSendTime = millis();            // timestamp the message
   }
 
@@ -120,9 +125,17 @@ void loop() {
     }      
     lastBLEUpdate = millis();
   }
+    //On device screen
+  if (millis() - lastUpdate > 200) {  // update every second to avoid constant display calls
+    updateDisplay();
+    lastUpdate = millis();
+  }
 }
 
 void updateDisplay(){
+  const unsigned long TIMEOUT_THRESHOLD = 16000;
+  bool flash = (millis() / 500) % 2;
+
   display.clearDisplay();
   display.setTextColor(WHITE);
   display.setTextSize(1);
@@ -131,20 +144,30 @@ void updateDisplay(){
   display.print("Device: Master");
 
   for(int i = 0; i < 2; i++){
-    if (clients[i].active){ // only display the rssi and distance for a client which has responded
-      int y = 16 + (i * 24);
-      display.setCursor(0, y);
-      display.print("Client 0x" + String(clients[i].id, HEX) + " RSSI: " + clients[i].rssi);
-    
-      float dist = rssiToDistance(clients[i].rssi); // Convert RSSI to estimated distance
-      display.setCursor(0, y + 12);
-      display.print("Dist: ");
-      if (dist < 0)
-        display.print("N/A");
-      else{
-        display.print(String(dist, 2)); // show two decimal places
-        display.print(" m");
+    display.setTextColor(WHITE);
+    int y = 16 + (i * 24);
+    if (!clients[i].active){ // only display the rssi and distance for a client which has responded
+      continue;
+    }
+    if (millis() - clients[i].lastResponse > TIMEOUT_THRESHOLD){
+      //display.setTextColor(INVERSE);
+      if (flash){
+        display.setCursor(0, y);
+        display.print("Client 0x" + String(clients[i].id, HEX) + ": UNRESPONSIVE");
       }
+      continue;
+    }
+    display.setCursor(0, y);
+    display.print("Client 0x" + String(clients[i].id, HEX) + " RSSI: " + clients[i].rssi);
+  
+    float dist = rssiToDistance(clients[i].rssi); // Convert RSSI to estimated distance
+    display.setCursor(0, y + 12);
+    display.print("Dist: ");
+    if (dist < 0)
+      display.print("N/A");
+    else{
+      display.print(String(dist, 2)); // show two decimal places
+      display.print(" m");
     }
   }
   display.display();
@@ -192,6 +215,7 @@ void receiveMessage(int packetSize){
     if (clients[i].id == sender) {
         clients[i].rssi = LoRa.packetRssi();
         clients[i].active = true;
+        clients[i].lastResponse = millis();
         break;
     }
   }
@@ -205,9 +229,9 @@ void receiveMessage(int packetSize){
   Serial.println("Snr: " + String(LoRa.packetSnr())); // snr gives ratio of received signal power compared to background noise power, the higer the snr, the stronger and clearer the signal is
   Serial.println();
 
-  //On device screen
-  if (millis() - lastUpdate > 200) {  // update every second to avoid constant display calls
-    updateDisplay();
-    lastUpdate = millis();
-  }
+  // //On device screen
+  // if (millis() - lastUpdate > 200) {  // update every second to avoid constant display calls
+  //   updateDisplay();
+  //   lastUpdate = millis();
+  // }
 }
