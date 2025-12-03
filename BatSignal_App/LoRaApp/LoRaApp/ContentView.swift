@@ -34,23 +34,15 @@ struct ContentView: View {
                 .scaledToFit()
                 .frame(width: 100, height: 100) // adjust size
             
-            Text("Connected to: \(bleManager.connectedDeviceName)")
+            Text("Connected to: Master")
                 .font(.headline)
                 .padding(.bottom, 10)
             
             Divider()
             
             // Display RSSI for Master and Clients
-            ForEach([Int64(0xAA), Int64(0xB1), Int64(0xB2)], id: \.self) { nodeId in
-                let rssi = bleManager.nodeRSSI[nodeId] ?? -100
-                VStack {
-                    Text(nodeName(for: nodeId))
-                        .font(.subheadline)
-                        .padding(.bottom, 2)
-                    ProximityView(rssi: rssi)
-                }
+            RadarView(clientRSSI: bleManager.nodeRSSI.filter { $0.key != 0xAA })
                 .padding()
-            }
             
             Divider()
 

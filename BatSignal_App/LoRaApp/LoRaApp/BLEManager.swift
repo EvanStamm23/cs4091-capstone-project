@@ -45,13 +45,11 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        if peripheral.name == "Master" {
-            loRaPeripheral = peripheral
-            loRaPeripheral!.delegate = self
-            centralManager.stopScan()
-            centralManager.connect(loRaPeripheral!)
-            print("Connecting to LoRa device...")
-        }
+        loRaPeripheral = peripheral
+        loRaPeripheral!.delegate = self
+        centralManager.stopScan()
+        centralManager.connect(loRaPeripheral!)
+        print("Connecting to LoRa device...")
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
