@@ -22,7 +22,7 @@ const byte MASTER_ID = 0xAA;
 const byte CLIENT1_ID = 0xB1;
 const byte CLIENT2_ID = 0xB2;
 
-byte localAddress = CLIENT2_ID;
+byte localAddress = CLIENT1_ID;
 byte messageID = 0;
 
 //Creates object for OLED screen called display

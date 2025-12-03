@@ -17,6 +17,7 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
     @Published var latestRSSI: Int = -100
     @Published var connectedDeviceName: String = "Not Connected"
     @Published var nodeRSSI: [Int64: Int] = [:] // key: sourceNodeId, value: RSSI
+    @Published var lostClients: [Int64: Bool] = [:]
     
     var loRaPeripheral: CBPeripheral?
     let characteristicUUID = CBUUID(string: "ABCD1234-5678-90AB-CDEF-1234567890AB")
@@ -91,27 +92,6 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
             }
         }
     }
-    
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        guard let data = characteristic.value,
-              let message = String(data: data, encoding: .utf8) else { return }
-
-        print("Received message: \(message)")
-        
-        if let log = parseLoRaMessage(message) {
-            nodeManager.createRSSILog(sourceId: log.source, targetId: log.target, rssiValue: log.rssi)
-
-            // ✅ Update RSSI in-memory for UI
-            DispatchQueue.main.async {
-                self.nodeRSSI[log.source] = Int(log.rssi)
-                
-                // If the source is the master, set device name
-                if log.source == 0xAA { // MASTER_ID
-                    self.connectedDeviceName = "Master"
-                }
-            }
-        }
-    }
 
     func parseLoRaMessage(_ message: String) -> (source: Int64, target: Int64, rssi: Int64)? {
         // Example: "RSSI,source=1,target=2,value=-70"
@@ -174,20 +154,34 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
 
         guard let data = characteristic.value,
               let message = String(data: data, encoding: .utf8) else { return }
-        
-        // Notify the UI
+
+        print("Received message: \(message)")
+
         DispatchQueue.main.async {
             self.messages.append(message)
         }
 
-        // Example: parse lost client messages
-        if message.starts(with: "ClientLost:") {
-            let clientHex = message.replacingOccurrences(of: "ClientLost:", with: "")
-            if let clientId = Int64(clientHex, radix: 16) {
+        // ---- JSON PARSING ----
+        if let jsonData = message.data(using: .utf8) {
+            do {
+                let loRa = try JSONDecoder().decode(LoRaMessage.self, from: jsonData)
+
+                // Update RSSI map
                 DispatchQueue.main.async {
-                    // Update UI state
-                    self.clientLostHandler?(clientId)
+                    self.nodeRSSI[loRa.source] = Int(loRa.rssi)
+                    self.lostClients[loRa.source] = loRa.isLost
                 }
+
+                // Save to DB
+                nodeManager.setNode(loRa.source, lost: loRa.isLost)
+                nodeManager.createRSSILog(
+                    sourceId: loRa.source,
+                    targetId: loRa.target,
+                    rssiValue: loRa.rssi
+                )
+
+            } catch {
+                print("JSON decode failed: \(error)")
             }
         }
     }
