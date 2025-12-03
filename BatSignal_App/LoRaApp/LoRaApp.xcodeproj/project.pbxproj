@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		842AC3E12EE0B54400CC63A2 /* NodeNaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842AC3E02EE0B54400CC63A2 /* NodeNaming.swift */; };
 		842AC3E32EE0BEB200CC63A2 /* ClientDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842AC3E22EE0BEB200CC63A2 /* ClientDot.swift */; };
+		842AC3E52EE0F30500CC63A2 /* LoRaMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842AC3E42EE0F30500CC63A2 /* LoRaMessage.swift */; };
 		8440C4752EC63F9700A8AAAD /* rssi_db.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8440C4732EC63F9700A8AAAD /* rssi_db.xcdatamodeld */; };
 		8440C4772EC642B900A8AAAD /* dbController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440C4762EC642B900A8AAAD /* dbController.swift */; };
 		8440C4792EC642EE00A8AAAD /* NodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440C4782EC642EE00A8AAAD /* NodeManager.swift */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		842AC3E02EE0B54400CC63A2 /* NodeNaming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeNaming.swift; sourceTree = "<group>"; };
 		842AC3E22EE0BEB200CC63A2 /* ClientDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientDot.swift; sourceTree = "<group>"; };
+		842AC3E42EE0F30500CC63A2 /* LoRaMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoRaMessage.swift; sourceTree = "<group>"; };
 		8440C4742EC63F9700A8AAAD /* rssi_db.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = rssi_db.xcdatamodel; sourceTree = "<group>"; };
 		8440C4762EC642B900A8AAAD /* dbController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dbController.swift; sourceTree = "<group>"; };
 		8440C4782EC642EE00A8AAAD /* NodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeManager.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 		849D2C022EBFE243006748B2 = {
 			isa = PBXGroup;
 			children = (
+				842AC3E42EE0F30500CC63A2 /* LoRaMessage.swift */,
 				842AC3E02EE0B54400CC63A2 /* NodeNaming.swift */,
 				8440C4782EC642EE00A8AAAD /* NodeManager.swift */,
 				8440C4762EC642B900A8AAAD /* dbController.swift */,
@@ -284,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				842AC3E12EE0B54400CC63A2 /* NodeNaming.swift in Sources */,
+				842AC3E52EE0F30500CC63A2 /* LoRaMessage.swift in Sources */,
 				849D2C112EBFE243006748B2 /* ContentView.swift in Sources */,
 				8440C4772EC642B900A8AAAD /* dbController.swift in Sources */,
 				849D2C3A2EBFE381006748B2 /* BLEManager.swift in Sources */,

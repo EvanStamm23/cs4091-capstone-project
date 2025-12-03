@@ -22,7 +22,7 @@ const byte MASTER_ID = 0xAA;
 const byte CLIENT1_ID = 0xB1;
 const byte CLIENT2_ID = 0xB2;
 
-byte localAddress = CLIENT1_ID;
+byte localAddress = CLIENT2_ID;
 byte messageID = 0;
 
 //Creates object for OLED screen called display
@@ -32,7 +32,6 @@ static unsigned long lastUpdate = 0;
 
 void setup() {
   Serial.begin(115200);                   // initialize serial
-  bleNode.begin();
   
   while (!Serial);
 
@@ -76,8 +75,6 @@ void setup() {
 
 void loop() {
   receiveMessage(LoRa.parsePacket());
-
-  delay(1000);
 }
 
 void updateDisplay(int rssiValue){

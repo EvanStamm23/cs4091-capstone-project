@@ -69,19 +69,19 @@ struct ContentView: View {
             .padding()
             
             // Report lost client button
-            Button(lostClients[selectedClientId] == true ? "Client Found" : "Client Lost") {
-                // Toggle the lost state
-                let newState = !(lostClients[selectedClientId] ?? false)
-                
-                // Update the UI state
-                lostClients[selectedClientId] = newState
-                
-                // Update the database
-                NodeManager().setNode(selectedClientId, lost: newState)
-            }
-            .padding()
-            .background(Color.gray.opacity(0.2))
-            .cornerRadius(8)
+//            Button(lostClients[selectedClientId] == true ? "Client Found" : "Client Lost") {
+//                // Toggle the lost state
+//                let newState = !(lostClients[selectedClientId] ?? false)
+//                
+//                // Update the UI state
+//                lostClients[selectedClientId] = newState
+//                
+//                // Update the database
+//                NodeManager().setNode(selectedClientId, lost: newState)
+//            }
+//            .padding()
+//            .background(Color.gray.opacity(0.2))
+//            .cornerRadius(8)
 
 
 
@@ -127,7 +127,6 @@ struct ContentView: View {
                 }
                 .frame(minHeight: 300, maxHeight: .infinity) // flexible height
             }
-
         }
         .padding()
     }

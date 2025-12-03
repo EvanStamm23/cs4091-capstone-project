@@ -163,4 +163,32 @@ class BLEManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeriph
     deinit {
         stopRSSIUpdates()
     }
+    
+    // ========== NOTIFICATION LOGIC ===================
+    // Assmuning receiving message from LoRa:
+    // {"clientId": "0xB1", "lost": true}
+    
+    func peripheral(_ peripheral: CBPeripheral,
+                    didUpdateValueFor characteristic: CBCharacteristic,
+                    error: Error?) {
+
+        guard let data = characteristic.value,
+              let message = String(data: data, encoding: .utf8) else { return }
+        
+        // Notify the UI
+        DispatchQueue.main.async {
+            self.messages.append(message)
+        }
+
+        // Example: parse lost client messages
+        if message.starts(with: "ClientLost:") {
+            let clientHex = message.replacingOccurrences(of: "ClientLost:", with: "")
+            if let clientId = Int64(clientHex, radix: 16) {
+                DispatchQueue.main.async {
+                    // Update UI state
+                    self.clientLostHandler?(clientId)
+                }
+            }
+        }
+    }
 }
