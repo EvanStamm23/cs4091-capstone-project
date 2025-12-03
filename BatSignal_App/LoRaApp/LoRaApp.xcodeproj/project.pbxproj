@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		842AC3E12EE0B54400CC63A2 /* NodeNaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842AC3E02EE0B54400CC63A2 /* NodeNaming.swift */; };
+		842AC3E32EE0BEB200CC63A2 /* ClientDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842AC3E22EE0BEB200CC63A2 /* ClientDot.swift */; };
 		8440C4752EC63F9700A8AAAD /* rssi_db.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8440C4732EC63F9700A8AAAD /* rssi_db.xcdatamodeld */; };
 		8440C4772EC642B900A8AAAD /* dbController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440C4762EC642B900A8AAAD /* dbController.swift */; };
 		8440C4792EC642EE00A8AAAD /* NodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440C4782EC642EE00A8AAAD /* NodeManager.swift */; };
@@ -40,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		842AC3E02EE0B54400CC63A2 /* NodeNaming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeNaming.swift; sourceTree = "<group>"; };
+		842AC3E22EE0BEB200CC63A2 /* ClientDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientDot.swift; sourceTree = "<group>"; };
 		8440C4742EC63F9700A8AAAD /* rssi_db.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = rssi_db.xcdatamodel; sourceTree = "<group>"; };
 		8440C4762EC642B900A8AAAD /* dbController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dbController.swift; sourceTree = "<group>"; };
 		8440C4782EC642EE00A8AAAD /* NodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeManager.swift; sourceTree = "<group>"; };
@@ -87,6 +91,7 @@
 		849D2C022EBFE243006748B2 = {
 			isa = PBXGroup;
 			children = (
+				842AC3E02EE0B54400CC63A2 /* NodeNaming.swift */,
 				8440C4782EC642EE00A8AAAD /* NodeManager.swift */,
 				8440C4762EC642B900A8AAAD /* dbController.swift */,
 				8440C4732EC63F9700A8AAAD /* rssi_db.xcdatamodeld */,
@@ -110,6 +115,7 @@
 		849D2C0D2EBFE243006748B2 /* LoRaApp */ = {
 			isa = PBXGroup;
 			children = (
+				842AC3E22EE0BEB200CC63A2 /* ClientDot.swift */,
 				849D2C0E2EBFE243006748B2 /* LoRaAppApp.swift */,
 				849D2C102EBFE243006748B2 /* ContentView.swift */,
 				8472A20E2EDF9FB6008DCEB4 /* RadarView.swift */,
@@ -277,11 +283,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				842AC3E12EE0B54400CC63A2 /* NodeNaming.swift in Sources */,
 				849D2C112EBFE243006748B2 /* ContentView.swift in Sources */,
 				8440C4772EC642B900A8AAAD /* dbController.swift in Sources */,
 				849D2C3A2EBFE381006748B2 /* BLEManager.swift in Sources */,
 				84BBAF392EC19133005934C8 /* ProximityView.swift in Sources */,
 				8440C4752EC63F9700A8AAAD /* rssi_db.xcdatamodeld in Sources */,
+				842AC3E32EE0BEB200CC63A2 /* ClientDot.swift in Sources */,
 				849D2C0F2EBFE243006748B2 /* LoRaAppApp.swift in Sources */,
 				8440C4792EC642EE00A8AAAD /* NodeManager.swift in Sources */,
 				8472A20F2EDF9FB6008DCEB4 /* RadarView.swift in Sources */,

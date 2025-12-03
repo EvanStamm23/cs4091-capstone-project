@@ -210,7 +210,7 @@ void receiveMessage(int packetSize){
 
   //On device screen
   if (millis() - lastUpdate > 200) {  // update every second to avoid constant display calls
-    updateDisplay(LoRa.packetRssi());
+    updateDisplay(LoRa.packetRssi(), String(sender, HEX));
     lastUpdate = millis();
   }
 }

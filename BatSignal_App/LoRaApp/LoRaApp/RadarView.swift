@@ -8,8 +8,10 @@
 import Foundation
 import SwiftUI
 
+
 struct RadarView: View {
     var clientRSSI: [Int64: Int] // clientId : RSSI
+    var lostClients: [Int64: Bool] = [:]
 
     let maxRadius: CGFloat = 150 // maximum distance from center
 
@@ -18,12 +20,21 @@ struct RadarView: View {
         return maxRadius - CGFloat(clamped + 100) * (maxRadius - 20) / 60
     }
 
-    func rssiToColor(_ rssi: Int) -> Color {
-        switch rssi {
-        case Int.min ... -81: return .red
-        case -80 ... -61: return .yellow
-        case -60 ... 0: return .green
-        default: return .gray
+//    func rssiToColor(_ rssi: Int) -> Color {
+//        switch rssi {
+//        case Int.min ... -81: return .red
+//        case -80 ... -61: return .yellow
+//        case -60 ... 0: return .green
+//        default: return .gray
+//        }
+//    }
+    
+    func nodeName(_ id: Int64) -> String {
+        switch id {
+        case 0xAA: return "Master"
+        case 0xB1: return "Client 1"
+        case 0xB2: return "Client 2"
+        default: return String(format: "0x%02X", id)
         }
     }
 
@@ -53,17 +64,12 @@ struct RadarView: View {
                 let angle = (angles[clientId] ?? 0) * .pi / 180
                 let x = cos(angle) * distance
                 let y = sin(angle) * distance
+                
+                let isLost = lostClients[clientId] ?? false
+                
+                ClientDot(clientName: nodeName(clientId), rssi: rssi, isLost: isLost)
+                    .offset(x: x, y: y)
 
-                ZStack {
-                    Circle()
-                        .fill(rssiToColor(rssi))
-                        .frame(width: 30, height: 30)
-                    Text(String(format: "0x%02X", clientId))
-                        .font(.caption2)
-                        .foregroundColor(.white)
-                }
-                .offset(x: x, y: y)
-                .animation(.easeInOut(duration: 0.3), value: rssi)
             }
         }
         .frame(width: maxRadius * 2 + 50, height: maxRadius * 2 + 50)

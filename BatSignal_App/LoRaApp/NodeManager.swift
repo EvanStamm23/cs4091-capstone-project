@@ -19,6 +19,22 @@ class NodeManager {
         self.context = context
     }
     
+    // set entity to lost if lost
+    func setNode(_ nodeId: Int64, lost: Bool) {
+        if let node = findNode(byId: nodeId) {
+            node.isLost = lost
+            saveContext()
+        }
+    }
+    
+    func saveContext() {
+        do {
+            try context.save()
+        } catch {
+            print("Failed to save context: \(error)")
+        }
+    }
+    
     // Create a leader node
     func createLeaderNode() -> NodeEntity? {
         // create and set new node properties
@@ -39,6 +55,8 @@ class NodeManager {
         let log = RSSILogEntity(context: context)
         log.sourceNodeId = sourceId
         log.targetNodeId = targetId
+        log.sourceName = nodeName(for: sourceId)
+        log.targetName = nodeName(for: targetId)
         log.rssiValue = rssiValue
         log.timestamp = Date()
         
