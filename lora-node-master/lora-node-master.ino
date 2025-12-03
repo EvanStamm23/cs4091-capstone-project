@@ -227,6 +227,7 @@ void receiveMessage(int packetSize){
         clients[i].rssi = LoRa.packetRssi();
         clients[i].active = true;
         clients[i].lastResponse = millis();
+        clients[i].lastDistance = rssiToDistance(clients[i].rssi);
         break;
     }
   }
