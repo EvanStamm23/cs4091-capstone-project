@@ -134,6 +134,7 @@ void loop() {
 
 void updateDisplay(){
   const unsigned long TIMEOUT_THRESHOLD = 16000;
+  const float DIST_THRESHOLD = 30.0;
   bool flash = (millis() / 500) % 2;
 
   display.clearDisplay();
@@ -153,10 +154,20 @@ void updateDisplay(){
       //display.setTextColor(INVERSE);
       if (flash){
         display.setCursor(0, y);
-        display.print("Client 0x" + String(clients[i].id, HEX) + ": UNRESPONSIVE");
+        display.println("Client 0x" + String(clients[i].id, HEX));
+        display.print("UNRESPONSIVE");
       }
       continue;
     }
+    if (clients[i].lastDistance >= DIST_THRESHOLD){
+      if (flash){
+        display.setCursor(0, y);
+        display.println("Client 0x" + String(clients[i].id, HEX)); 
+        display.print("OUT OF RANGE");
+      }
+      continue;
+    }
+
     display.setCursor(0, y);
     display.print("Client 0x" + String(clients[i].id, HEX) + " RSSI: " + clients[i].rssi);
   
