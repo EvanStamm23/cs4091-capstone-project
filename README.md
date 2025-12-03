@@ -50,6 +50,7 @@ Navigate to File < Preferences and paste 'https://raw.githubusercontent.com/espr
 - Adafruit BusIO by Adafruit (Version 1.17.4)
 - LoRa by Sandeep Mistry (Version 0.8.0)
 - NimBLE-Arduino by h2zero (Version 2.3.6)
+- LoRaBLE - custom lora BLE header file, must take LoRaBLE.h from libraries/ and copy to local Arduino/libraries/
 
 ## 5.0 - Mobile App
 ### Bluetooth Communication
