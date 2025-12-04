@@ -25,12 +25,12 @@ cs4091-capstone-project/
 │   ├── LoRaAppUITests/             # UI tests 
 ├── lora-nodes/                     # Arduino/LoRa node code <br>
 │   ├── lora-nodes.ino              # Shared logic between LoRa nodes (BLE setup, function to send data over BLE)
-├── lora-node-1/                    # Logic for LoRa-node-1, unquie node_id, calc. RSSI
+├── lora-node-master/               # Logic for LoRa-node-master, unquie node_id, calc. RSSI
 │   ├── lora-node-1.ino              
-├── lora-node-2/                    # Logic for LoRa-node-2
-│   ├── lora-node-2.ino
-├── lora-node-3/                    # Logic for LoRa-node-3     
-│   ├── lora-node-3.ino             
+├── lora-node-client1/              # Logic for LoRa-node-client1
+│   ├── lora-node-client1.ino
+├── lora-node-client2/              # Logic for LoRa-node-client2    
+│   ├── lora-node-client2.ino             
 ├── lora-recv/                      # LoRa receiver code (test code) 
 │   └── lora-recv.ino 
 ├── lora/                           # LoRa sender code (test code) 
@@ -50,6 +50,7 @@ Navigate to File < Preferences and paste 'https://raw.githubusercontent.com/espr
 - Adafruit BusIO by Adafruit (Version 1.17.4)
 - LoRa by Sandeep Mistry (Version 0.8.0)
 - NimBLE-Arduino by h2zero (Version 2.3.6)
+- LoRaBLE - custom lora BLE header file, must take LoRaBLE.h from libraries/ and copy to local Arduino/libraries/
 
 ## 5.0 - Mobile App
 ### Bluetooth Communication
