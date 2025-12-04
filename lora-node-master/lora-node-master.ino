@@ -31,7 +31,7 @@ LoRaBLE bleNode("Master", "12345678-1234-1234-1234-1234567890ab", "abcd1234-5678
 byte messageID = 0;
 byte localAddress = MASTER_ID;     // address of this device
 long lastSendTime = 0;        // last send time
-int interval = 5000;          // interval between sends, default starting at 12s
+int interval = 2500;          // interval between sends, default starting at 12s
 byte nextClient = CLIENT1_ID;
 
 //Creates object for OLED screen called display
@@ -50,14 +50,25 @@ ClientRSSI clients[2] = {{CLIENT1_ID, 0, false, 0}, {CLIENT2_ID, 0, false, 0}};
 
 // RSSI distance formula constants
 // PATH_LOSS_EXPONENT: environment factor (2.0 = free space, 2.7-4 indoor)
-const float RSSI_AT_ONE_METER = -40.0; 
-const float PATH_LOSS_EXPONENT = 4.0;
+const float RSSI_AT_ONE_METER = -35.0; 
+const float PATH_LOSS_EXPONENT = 2.7;
 
 // Convert RSSI to distanceusing d = 10^{(A - R) / (10 * n)}
 float rssiToDistance(int rssi) {
   if (rssi == 0) return -1.0;
   float exponent = (RSSI_AT_ONE_METER - (float)rssi) / (10.0 * PATH_LOSS_EXPONENT);
   return pow(10.0, exponent);
+}
+
+bool isClientLost(const ClientRSSI &client) {
+  const unsigned long TIMEOUT_THRESHOLD = 16000;
+  const float DIST_THRESHOLD = 20.0;
+
+  if (!client.active) return true;
+  if (millis() - client.lastResponse > TIMEOUT_THRESHOLD) return true;
+  if (client.lastDistance >= DIST_THRESHOLD) return true;
+
+  return false;
 }
 
 
@@ -120,11 +131,23 @@ void loop() {
 
   static unsigned long lastBLEUpdate = 0;
   if (millis() - lastBLEUpdate > 1000) {
-    for (int i=0; i<2; i++) {
-        bleNode.notifyRSSI(clients[i].id, localAddress, clients[i].rssi);
-    }      
-    lastBLEUpdate = millis();
+
+      for (int i = 0; i < 2; i++) {
+
+          bool lost = isClientLost(clients[i]);
+
+          String json = "{";
+          json += "\"id\":\"" + String(clients[i].id, HEX) + "\",";
+          json += "\"rssi\":" + String(clients[i].rssi) + ",";
+          json += "\"isLost\":" + String(lost ? "true" : "false");
+          json += "}";
+
+          bleNode.notifyMessage(json);   // send JSON to iPhone
+      }
+
+      lastBLEUpdate = millis();
   }
+
     //On device screen
   if (millis() - lastUpdate > 200) {  // update every second to avoid constant display calls
     updateDisplay();
@@ -134,7 +157,7 @@ void loop() {
 
 void updateDisplay(){
   const unsigned long TIMEOUT_THRESHOLD = 16000;
-  const float DIST_THRESHOLD = 30.0;
+  const float DIST_THRESHOLD = 20.0;
   bool flash = (millis() / 500) % 2;
 
   display.clearDisplay();
@@ -247,3 +270,4 @@ void receiveMessage(int packetSize){
   //   lastUpdate = millis();
   // }
 }
+

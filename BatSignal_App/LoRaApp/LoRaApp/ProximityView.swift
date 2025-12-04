@@ -9,15 +9,18 @@ import Foundation
 import SwiftUI
 
 struct ProximityView: View {
-    var rssi: Int // e.g. -75
-    
+    var rssi: Int
+    var isLost: Bool // new property
+
     var normalizedProximity: CGFloat {
-        // Map RSSI (-100 to -40) → size (50 to 200)
         let clamped = min(max(rssi, -100), -40)
         return CGFloat(200 - (clamped + 100) * 3)
     }
     
     var proximityColor: Color {
+        if isLost {
+            return .red
+        }
         switch rssi {
         case Int.min ... -81: return .red
         case -80 ... -61: return .yellow
@@ -27,6 +30,9 @@ struct ProximityView: View {
     }
     
     var proximityLabel: String {
+        if isLost {
+            return "Lost"
+        }
         switch rssi {
         case Int.min ... -81: return "Far"
         case -80 ... -61: return "Nearby"
@@ -53,4 +59,3 @@ struct ProximityView: View {
         .padding()
     }
 }
-
