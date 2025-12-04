@@ -32,7 +32,6 @@ static unsigned long lastUpdate = 0;
 
 void setup() {
   Serial.begin(115200);                   // initialize serial
-  bleNode.begin();
   
   while (!Serial);
 
@@ -77,22 +76,33 @@ void setup() {
 void loop() {
   receiveMessage(LoRa.parsePacket());
 
-  delay(1000);
+  //delay(1000);
 }
 
 void updateDisplay(int rssiValue, float dist){
+  bool flash = (millis() / 500) % 2;
+  const float DIST_THRESHOLD = 20.0;
+
   display.clearDisplay();
   display.setTextColor(WHITE);
   display.setTextSize(1);
+
   display.setCursor(0,0);
   display.print("Device: ");
   display.println("Client 2");
   display.setCursor(0,20);
-  display.print("RSSI of Sender: ");
+  display.print("RSSI of Leader: ");
   display.println(rssiValue);
+  display.setCursor(0,30);
+  display.print("Estimated Distance: ");
   display.setCursor(0,40);
-  display.print("Distance: ");
-  display.println(dist);
+  display.println(String(dist) + "m");
+
+  if (dist >= DIST_THRESHOLD){
+      display.setCursor(0, 50); 
+      display.print("OUT OF RANGE");
+    }
+
   display.display();
 }
 
@@ -121,7 +131,7 @@ void receiveMessage(int packetSize){
     return;
   }
 
-  float dist = calculateDist(Lora.packetRssi());
+  float dist = calculateDist(LoRa.packetRssi());
 
   Serial.println("Received from LoRa Node: 0x" + String(sender, HEX));
   Serial.println("Sent to LoRa Node: 0x" + String(recipient, HEX));
@@ -130,6 +140,7 @@ void receiveMessage(int packetSize){
   Serial.println("Message: " + incomingMessage);
   Serial.println("RSSI: " + String(LoRa.packetRssi()));
   Serial.println("Snr: " + String(LoRa.packetSnr())); // snr gives ratio of recieved signal power compared to background noise power, the higer the snr, the stronger and clearer the signal is
+  Serial.println("Distance: " + String(dist));
   Serial.println();
   
   //On device screen
@@ -159,8 +170,8 @@ void sendReply(byte destination) {
 
 float calculateDist(int rssiValue) {
   float dist = 0; //Estimated distance
-  float power = -40.0; //Measured power(RSSI at 1 meter)
-  double n = 4.0; //environmental factor(can range from 2-4)
+  float power = -35.0; //Measured power(RSSI at 1 meter)
+  double n = 2.7; //environmental factor(can range from 2-4)
   dist = pow(10,( (power - rssiValue) / (10 * n) ) );
   return dist;
 }
